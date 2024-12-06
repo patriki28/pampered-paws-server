@@ -107,11 +107,8 @@ const UserService = {
       throw new Error('No user found with this email.');
     }
 
-    const resetToken = crypto.randomBytes(20).toString('hex');
-    const resetTokenExpiresAt = Date.now() + TOKEN_EXPIRATION_TIME;
-
-    user.resetPasswordToken = resetToken;
-    user.resetPasswordExpiresAt = resetTokenExpiresAt;
+    user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordExpiresAt = Date.now() + TOKEN_EXPIRATION_TIME;
 
     await user.save();
 

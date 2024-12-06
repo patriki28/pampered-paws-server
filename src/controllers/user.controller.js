@@ -35,7 +35,6 @@ const UserController = {
         lastName: user.lastName,
         phoneNumber: user.phoneNumber,
         email: user.email,
-        verificationToken: user.verificationToken,
       },
     });
   }),
@@ -58,6 +57,14 @@ const UserController = {
 
     generateToken(res, user._id);
 
+    if (!user.isVerified) {
+      await sendVerificationEmail(admin.email, admin.verificationToken);
+
+      throw new Error(
+        `User is not verified. A verification email has been sent. Please check your email.`,
+      );
+    }
+
     res.status(200).json({
       success: true,
       message: 'Logged in successfully',
@@ -68,7 +75,6 @@ const UserController = {
         lastName: user.lastName,
         phoneNumber: user.phoneNumber,
         email: user.email,
-        verificationToken: user.verificationToken,
       },
     });
   }),

@@ -8,7 +8,7 @@ const swaggerConfig = {
     version: '1.0.0',
     title: 'Pampered Paws Server',
     description:
-      'Pampered Paws Server is a web server with a RESTful API designed to streamline and manage dog grooming appointments, making it easier for customers to schedule, modify, and track their grooming sessions.',
+      'Pampered Paws Server is a web server with a REST API designed to streamline and manage dog grooming appointments, making it easier for customers to schedule, modify, and track their grooming sessions.',
   },
   baseDir: path.join(__dirname, '../'),
   filesPattern: './**/*.js',

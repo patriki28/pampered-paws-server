@@ -49,7 +49,7 @@ const AdminController = {
       await sendVerificationEmail(admin.email, admin.verificationToken);
 
       throw new Error(
-        `Admin is not verified. A verification email has been sent. Vefication token: ${admin.verificationToken}`,
+        `Admin is not verified. A verification email has been sent. Please check your email.`,
       );
     }
 

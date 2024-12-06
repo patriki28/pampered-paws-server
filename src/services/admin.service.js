@@ -94,8 +94,7 @@ const AdminService = {
       throw new Error('No admin found with this email.');
     }
 
-    const resetToken = crypto.randomBytes(20).toString('hex');
-    admin.resetPasswordToken = resetToken;
+    admin.resetPasswordToken = crypto.randomBytes(20).toString('hex');
     admin.resetPasswordExpiresAt = Date.now() + TOKEN_EXPIRATION_TIME;
 
     await admin.save();
@@ -183,8 +182,6 @@ const AdminService = {
     admin.password = newPassword;
 
     await admin.save();
-
-    return;
   },
 };
 
