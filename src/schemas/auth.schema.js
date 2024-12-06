@@ -56,14 +56,6 @@ export const ResetPasswordSchema = z.object({
 });
 
 export const ChangePasswordSchema = z.object({
-  params: z.object({
-    token: z
-      .string({
-        required_error: 'Token is required',
-        invalid_type_error: 'Token must be a string',
-      })
-      .trim(),
-  }),
   body: z.object({
     currentPassword: z
       .string({

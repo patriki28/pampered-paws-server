@@ -91,7 +91,6 @@ const UserController = {
     res.status(200).json({
       success: true,
       message: 'Password reset link sent to your email',
-      resetPasswordToken: user.resetPasswordToken,
     });
   }),
 
@@ -115,9 +114,14 @@ const UserController = {
   }),
 
   updateProfile: asyncHandler(async (req, res) => {
-    const { username } = req.body;
+    const { firstName, middleName, lastName } = req.body;
 
-    const user = await UserService.updateProfile(req.userId, username);
+    const user = await UserService.updateProfile(
+      req.userId,
+      firstName,
+      middleName,
+      lastName,
+    );
 
     res
       .status(200)
