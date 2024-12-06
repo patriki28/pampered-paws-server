@@ -73,6 +73,10 @@ const UserService = {
       '_id firstName middleName lastName email phoneNumber isVerified password verificationToken verificationTokenExpiresAt',
     );
 
+    if (!user) {
+      throw new Error('Invalid credentials.');
+    }
+
     if (!user.isVerified) {
       user.verificationToken = generateVerificationToken();
       user.verificationTokenExpiresAt = Date.now() + TOKEN_EXPIRATION_TIME;

@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './configs/db.config.js';
 import logger from './lib/winston/logger.js';
 import errorHandler from './middlewares/error-handler.middleware.js';
-import { APP_BASE_URL, APP_PORT } from './configs/env.config.js';
+import { APP_BASE_URL, APP_PORT, CLIENT_URL } from './configs/env.config.js';
 
 import expressJSDocSwagger from 'express-jsdoc-swagger';
 import swaggerConfig from './configs/swagger.config.js';
@@ -20,7 +20,15 @@ expressJSDocSwagger(app)(swaggerConfig);
 
 connectDB();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: CLIENT_URL,
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true,
+  }),
+);
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
