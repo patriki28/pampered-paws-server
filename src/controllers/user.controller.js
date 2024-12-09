@@ -3,17 +3,15 @@ import UserService from '../services/user.service.js';
 import generateToken from '../utils/generate-token.js';
 import { CLIENT_URL } from '../configs/env.config.js';
 import {
+  sendVerificationEmail,
   sendPasswordResetEmail,
   sendPasswordResetSuccessEmail,
-  sendVerificationEmail,
-  sendWelcomeEmail,
-} from '../lib/mailtrap/email.js';
+} from '../lib/nodemailer/email.js';
 
 const UserController = {
   register: asyncHandler(async (req, res) => {
     const { firstName, middleName, lastName, phoneNumber, email, password } =
       req.body;
-
     const user = await UserService.register(
       firstName,
       middleName,
@@ -41,9 +39,7 @@ const UserController = {
 
   verifyEmail: asyncHandler(async (req, res) => {
     const { code } = req.body;
-    const user = await UserService.verifyEmail(code);
-
-    await sendWelcomeEmail(user.email, user.lastName);
+    await UserService.verifyEmail(code);
 
     res.status(200).json({
       success: true,

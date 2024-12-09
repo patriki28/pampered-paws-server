@@ -3,11 +3,10 @@ import AdminService from '../services/admin.service.js';
 import generateToken from '../utils/generate-token.js';
 import { CLIENT_URL } from '../configs/env.config.js';
 import {
+  sendVerificationEmail,
   sendPasswordResetEmail,
   sendPasswordResetSuccessEmail,
-  sendVerificationEmail,
-  sendWelcomeEmail,
-} from '../lib/mailtrap/email.js';
+} from '../lib/nodemailer/email.js';
 
 const AdminController = {
   register: asyncHandler(async (req, res) => {
@@ -29,9 +28,7 @@ const AdminController = {
 
   verifyEmail: asyncHandler(async (req, res) => {
     const { code } = req.body;
-    const admin = await AdminService.verifyEmail(code);
-
-    await sendWelcomeEmail(admin.email, admin.username);
+    await AdminService.verifyEmail(code);
 
     res.status(200).json({
       success: true,
