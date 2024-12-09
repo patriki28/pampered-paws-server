@@ -65,7 +65,7 @@ const UserService = {
 
     await user.save();
 
-    return { email: admin.email, lastName: admin.lastName };
+    return;
   },
 
   async login(email, password) {

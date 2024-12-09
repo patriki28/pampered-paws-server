@@ -54,7 +54,7 @@ const UserController = {
     generateToken(res, user._id);
 
     if (!user.isVerified) {
-      await sendVerificationEmail(admin.email, admin.verificationToken);
+      await sendVerificationEmail(user.email, user.verificationToken);
 
       throw new Error(
         `User is not verified. A verification email has been sent. Please check your email.`,

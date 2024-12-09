@@ -51,7 +51,7 @@ const AdminService = {
 
     await admin.save();
 
-    return { email: admin.email, username: admin.username };
+    return;
   },
 
   async login(email, password) {
